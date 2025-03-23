@@ -1,0 +1,78 @@
+/* ======= Styles généraux ======= */
+body {
+  font-family: Arial, sans-serif; /* Police d'écriture principale */
+  background-color: #d3d1d1; /* gris clair  */
+  display: flex;
+  justify-content: center; /* Centrer la carte horizontalement */
+  align-items: center; /* Centrer la carte verticalement */
+  height: 100vh; /* Prend toute la hauteur de l'écran */
+}
+
+/* ======= Carte d'identité ======= */
+.id-card {
+  width: 350px; /* Largeur fixe de la carte */
+  background: rgb(255, 255, 255); /* Fond blanc */
+  /* padding: 15px; Espacement interne */
+  border-radius: 10px; /* Coins arrondis */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ombre pour effet 3D */
+  text-align: center; /* Centrer le texte */
+  border: 2px solid #d51111; /* Bordure bleue */
+  font-family: "Times New Roman", Times, serif; /* La police   */
+}
+
+/* ======= En-tête ======= */
+.header {
+  text-align: center; /* Centrer le texte */
+  border-bottom: 2px solid #ff1 010; /* Ligne bleue en bas */
+  background: #010b45;
+  padding-bottom: 1px; /* Espacement en bas */
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+.header .logo {
+  width: 100px; /* Taille du logo */
+  margin: 10px;
+}
+
+/* Styles des titres */
+.header h2,
+.header h3 {
+  margin: 5px 0; /* Réduction des marges */
+  color: #e3ca51; /* Texte en bleu */
+}
+
+/* ======= Section photo ======= */
+.photo-section {
+  margin: 10px 0; /* Espacement autour de la photo */
+}
+
+.photo {
+  width: 100px; /* Taille de la photo */
+  height: 100px; /* Hauteur égale à la largeur */
+  border-radius: 50%; /* Rend l'image ronde */
+  border: 2px solid #ffd000; /* Bordure bleue */
+}
+
+/* ======= Informations ======= */
+.info p {
+  margin: 5px 0; /* Espacement entre les lignes */
+  font-size: 14px; /* Taille de la police */
+  text-align: left; /* Alignement à gauche */
+  padding: 0 10px; /* Espacement sur les côtés */
+}
+
+/* ======= Section QR Code ======= */
+.qr-section {
+  margin-top: 10px; /* Espacement avant le QR Code */
+}
+
+.qr-code {
+  width: 60px; /* Taille du QR Code */
+}
+
+/* ======= Pied de page ======= */
+.footer {
+  margin-top: 10px; /* Espacement avant le pied de page */
+  font-size: 12px; /* Réduction de la taille de police */
+  color: #555; /* Couleur gris foncé */
+}

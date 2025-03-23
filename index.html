@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="home.css" />
+  </head>
+  <body>
+    <!-- Conteneur principal de la carte d'identité -->
+    <div class="id-card">
+      <!-- En-tête contenant le logo et le titre -->
+      <div class="header">
+        <img
+          src="img/ba.jpg"
+          alt="Logo République Démocratique du Congo"
+          class="logo"
+        />
+        <h2>République Démocratique du Congo</h2>
+        <h3>Carte Nationale d'Identité</h3>
+      </div>
+
+      <!-- Section pour afficher la photo du citoyen -->
+      <div class="photo-section">
+        <img src="img/USER .jpg" alt="Photo du citoyen" class="photo" />
+      </div>
+
+      <!-- Section contenant les informations personnelles -->
+      <div class="info">
+        <p><strong>Nom :</strong>BUATI</p>
+        <p><strong>Prénom :</strong>CHRISTIAN</p>
+        <p><strong>Date de naissance :</strong> 31/03/2001</p>
+        <p><strong>Sexe :</strong> Masculin</p>
+        <p><strong>Nationalité :</strong> Congolaise</p>
+        <p><strong>Adresse :</strong>Misana N°21 Q/Musey</p>
+        <p><strong>N° d'Identité :</strong>CD1234567890</p>
+      </div>
+
+      <!-- Section QR Code pour vérification -->
+      <div class="qr-section">
+        <img
+          src="img/code-qr-blanc_356060-274.avif"
+          alt="QR Code de vérification"
+          class="qr-code"
+        />
+      </div>
+
+      <!-- Pied de page avec la date d'émission et d'expiration -->
+      <div class="footer">
+        <p>Date d'émission : 01/01/2025</p>
+        <p>Date d'expiration : 01/01/2035</p>
+      </div>
+    </div>
+
+    <script>
+      // Classe principale pour la gestion de la carte d'identité
+      class IdentityCard {
+        constructor() {
+          this.data = {
+            name: "BUATI",
+            firstName: "CHRISTIAN",
+            birthDate: "31/03/2001",
+            gender: "Masculin",
+            nationality: "Congolaise",
+            address: "Misana N°21 Q/Musey",
+            idNumber: "CD1234567890",
+            issueDate: "01/01/2025",
+            expirationDate: "01/01/2035",
+          };
+
+          this.init();
+        }
+
+        // Initialisation des éléments DOM
+        init() {
+          this.domElements = {
+            name: document.querySelector(".info p:first-child"),
+            firstName: document.querySelector(".info p:nth-child(2)"),
+            birthDate: document.querySelector(".info p:nth-child(3)"),
+            gender: document.querySelector(".info p:nth-child(4)"),
+            nationality: document.querySelector(".info p:nth-child(5)"),
+            address: document.querySelector(".info p:nth-child(6)"),
+            idNumber: document.querySelector(".info p:last-child"),
+            issueDate: document.querySelector(".footer p:first-child"),
+            expirationDate: document.querySelector(".footer p:last-child"),
+          };
+
+          this.updateDisplay();
+          this.addEventListeners();
+        }
+
+        // Mise à jour de l'affichage
+        updateDisplay() {
+          Object.keys(this.data).forEach((key) => {
+            const element = this.domElements[key];
+            if (element) {
+              element.textContent = element.textContent.replace(
+                /:.*/,
+                `: ${this.data[key]}`
+              );
+            }
+          });
+        }
+
+        // Gestion des événements
+        addEventListeners() {
+          // Exemple de gestion d'événement pour la modification des données
+          document.addEventListener("click", (e) => {
+            if (e.target.classList.contains("editable")) {
+              this.editField(e.target);
+            }
+          });
+        }
+
+        // Méthode de validation des données
+        validateData(data) {
+          const validationRules = {
+            name: /^[a-zA-Z ]+$/,
+            firstName: /^[a-zA-Z ]+$/,
+            birthDate: /^\d{2}\/\d{2}\/\d{4}$/,
+            gender: /^(Masculin|Féminin)$/,
+            nationality: /^[a-zA-Z ]+$/,
+            address: /^[^<>]+$/,
+            idNumber: /^[A-Z]{2}\d{10}$/,
+            issueDate: /^\d{2}\/\d{2}\/\d{4}$/,
+            expirationDate: /^\d{2}\/\d{2}\/\d{4}$/,
+          };
+
+          return Object.keys(validationRules).every((key) => {
+            return validationRules[key].test(data[key]);
+          });
+        }
+
+        // Méthode d'édition des champs
+        editField(element) {
+          const input = document.createElement("input");
+          input.value = this.data[element.dataset.field];
+          input.classList.add("editable-input");
+          element.replaceWith(input);
+
+          input.addEventListener("blur", () => {
+            const newData = { ...this.data };
+            newData[element.dataset.field] = input.value;
+
+            if (this.validateData(newData)) {
+              this.data = newData;
+              this.updateDisplay();
+            } else {
+              alert("Données invalides");
+            }
+          });
+        }
+      }
+
+      // Initialisation de la carte
+      document.addEventListener("DOMContentLoaded", () => {
+        new IdentityCard();
+      });
+    </script>
+  </body>
+</html>
